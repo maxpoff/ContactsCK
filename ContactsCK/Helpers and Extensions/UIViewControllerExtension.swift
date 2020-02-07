@@ -6,7 +6,6 @@
 //  Copyright © 2020 Maxwell Poffenbarger. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension UIViewController {

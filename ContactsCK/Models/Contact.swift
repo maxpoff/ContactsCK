@@ -17,11 +17,11 @@ struct Constants {
 
 class Contact {
     var name: String
-    var phoneNumber: String
-    var emailAddress: String
+    var phoneNumber: String?
+    var emailAddress: String?
     var ckRecordID: CKRecord.ID
     
-    init(name:String, phoneNumber: String, emailAddress: String, ckRecordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(name:String, phoneNumber: String?, emailAddress: String?, ckRecordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.emailAddress = emailAddress
@@ -32,9 +32,11 @@ class Contact {
 extension Contact {
     
     convenience init?(ckRecord: CKRecord) {
-        guard let name = ckRecord[Constants.nameKey] as? String,
-            let phoneNumber = ckRecord[Constants.phoneNumberKey] as? String,
-            let emailAddress = ckRecord[Constants.emailAddressKey] as? String else {return nil}
+        guard let name = ckRecord[Constants.nameKey] as? String else {return nil}
+        
+        let phoneNumber = ckRecord[Constants.phoneNumberKey] as? String
+        
+        let emailAddress = ckRecord[Constants.emailAddressKey] as? String
         
         self.init(name: name, phoneNumber: phoneNumber, emailAddress: emailAddress, ckRecordID: ckRecord.recordID)
     }
@@ -45,9 +47,15 @@ extension CKRecord {
     convenience init(contact: Contact) {
         self.init(recordType: Constants.contactRecordTypeKey, recordID: contact.ckRecordID)
         
-        setValuesForKeys([Constants.nameKey : contact.name,
-                          Constants.phoneNumberKey : contact.phoneNumber,
-                          Constants.emailAddressKey : contact.emailAddress])
+        setValuesForKeys([Constants.nameKey : contact.name])
+        
+        if let phoneNumber = contact.phoneNumber {
+            self.setValue(phoneNumber, forKey: Constants.phoneNumberKey)
+        }
+        
+        if let emailAddress = contact.emailAddress {
+            self.setValue(emailAddress, forKey: Constants.emailAddressKey)
+        }
     }
 }//End of extension
 

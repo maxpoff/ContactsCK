@@ -16,7 +16,7 @@ class ContactController {
     let privateDB = CKContainer.default().privateCloudDatabase
     
     //MARK: - CloudKit Methods
-    func createContact(name: String, phoneNumber: String, emailAddress: String, completion: @escaping (Result<Contact, ContactError>) -> Void) {
+    func createContact(name: String, phoneNumber: String?, emailAddress: String?, completion: @escaping (Result<Contact, ContactError>) -> Void) {
         
         let contact = Contact(name: name, phoneNumber: phoneNumber, emailAddress: emailAddress)
         
@@ -60,7 +60,7 @@ class ContactController {
         }
     }
     
-    func update(contact: Contact, name: String, phoneNumber: String, emailAddress: String, completion: @escaping (Result<Contact, ContactError>) -> Void) {
+    func update(contact: Contact, name: String, phoneNumber: String?, emailAddress: String?, completion: @escaping (Result<Contact, ContactError>) -> Void) {
         
         contact.name = name
         contact.phoneNumber = phoneNumber

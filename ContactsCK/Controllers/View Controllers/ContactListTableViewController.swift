@@ -37,10 +37,6 @@ class ContactListTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    //    override func numberOfSections(in tableView: UITableView) -> Int {
-    //        return 0
-    //    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ContactController.sharedInstance.contacts.count
     }
@@ -55,7 +51,6 @@ class ContactListTableViewController: UITableViewController {
         return cell
     }
     
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         let contactToDelete = ContactController.sharedInstance.contacts[indexPath.row]
