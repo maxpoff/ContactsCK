@@ -65,3 +65,12 @@ extension Contact: Equatable {
         lhs.ckRecordID == rhs.ckRecordID
     }
 }//End of extension
+
+extension Contact: SearchableRecord {
+    func matches(searchTerm: String) -> Bool {
+        if name.lowercased().contains(searchTerm.lowercased()) {
+            return true
+        }
+        return false
+    }
+}//End of extension

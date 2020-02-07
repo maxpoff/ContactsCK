@@ -10,14 +10,26 @@ import UIKit
 
 class ContactListTableViewController: UITableViewController {
     
+    //MARK: - Properties
+    var resultsArray: [SearchableRecord] = []
+    var isSearching: Bool = false
+    var dataSource: [SearchableRecord] {
+        return isSearching ? resultsArray : ContactController.sharedInstance.contacts
+    }
+    
+    //MARK: - Outlets
+    @IBOutlet weak var contactSearchBar: UISearchBar!
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        contactSearchBar.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        resultsArray = ContactController.sharedInstance.contacts
         self.tableView.reloadData()
     }
     
@@ -38,13 +50,13 @@ class ContactListTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ContactController.sharedInstance.contacts.count
+        return dataSource.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
         
-        let contact = ContactController.sharedInstance.contacts[indexPath.row]
+        guard let contact = dataSource[indexPath.row] as? Contact else {return UITableViewCell()}
         
         cell.textLabel?.text = contact.name
         
@@ -74,7 +86,7 @@ class ContactListTableViewController: UITableViewController {
             }
         }
     }
-
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailVC",
@@ -85,3 +97,34 @@ class ContactListTableViewController: UITableViewController {
         }
     }
 }//End of class
+
+//MARK: - Extensions
+extension ContactListTableViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if !searchText.isEmpty {
+            resultsArray = ContactController.sharedInstance.contacts.filter { $0.matches(searchTerm: searchText) }
+            tableView.reloadData()
+        } else {
+            resultsArray = ContactController.sharedInstance.contacts
+            tableView.reloadData()
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        resultsArray = ContactController.sharedInstance.contacts
+        tableView.reloadData()
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isSearching = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        isSearching = false
+    }
+}//End of extension

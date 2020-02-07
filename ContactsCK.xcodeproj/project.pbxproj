@@ -19,6 +19,7 @@
 		97B7599023EDCB2A005F6394 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B7598F23EDCB2A005F6394 /* UIViewControllerExtension.swift */; };
 		97B7599223EDCD7C005F6394 /* ContactListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B7599123EDCD7C005F6394 /* ContactListTableViewController.swift */; };
 		97B7599423EDCD8F005F6394 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B7599323EDCD8F005F6394 /* ContactDetailViewController.swift */; };
+		97B7599623EDE3CD005F6394 /* SearchableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B7599523EDE3CD005F6394 /* SearchableRecord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		97B7598F23EDCB2A005F6394 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		97B7599123EDCD7C005F6394 /* ContactListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListTableViewController.swift; sourceTree = "<group>"; };
 		97B7599323EDCD8F005F6394 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
+		97B7599523EDE3CD005F6394 /* SearchableRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableRecord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			children = (
 				97B7598D23EDC808005F6394 /* ContactError.swift */,
 				97B7598F23EDCB2A005F6394 /* UIViewControllerExtension.swift */,
+				97B7599523EDE3CD005F6394 /* SearchableRecord.swift */,
 			);
 			path = "Helpers and Extensions";
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			files = (
 				97B7598923EDC2B7005F6394 /* Contact.swift in Sources */,
 				97B7596B23EDC232005F6394 /* AppDelegate.swift in Sources */,
+				97B7599623EDE3CD005F6394 /* SearchableRecord.swift in Sources */,
 				97B7599223EDCD7C005F6394 /* ContactListTableViewController.swift in Sources */,
 				97B7599023EDCB2A005F6394 /* UIViewControllerExtension.swift in Sources */,
 				97B7598C23EDC676005F6394 /* ContactController.swift in Sources */,
